@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <View
+        style="@style/style_line"/>
+
+    <com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabsIndicator
+        android:id="@+id/alpha_tab"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal">
+
+        <com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            app:paddingTexwithIcon="4dp"
+            app:tabIconNormal="@mipmap/foot_home_normal"
+            app:tabIconSelected="@mipmap/foot_home_select"
+            app:tabText="首页"
+            app:tabTextSize="12sp"
+            app:textColorNormal="@color/bottom_text_normal"
+            app:textColorSelected="@color/bottom_text_select"/>
+
+        <com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            app:paddingTexwithIcon="4dp"
+            app:tabIconNormal="@mipmap/foot_query_normal"
+            app:tabIconSelected="@mipmap/foot_query_select"
+            app:tabText="咨询"
+            app:tabTextSize="12sp"
+            app:textColorNormal="@color/bottom_text_normal"
+            app:textColorSelected="@color/bottom_text_select"/>
+
+        <com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            app:paddingTexwithIcon="4dp"
+            app:tabIconNormal="@mipmap/foot_message_normal"
+            app:tabIconSelected="@mipmap/foot_message_select"
+            app:tabText="消息"
+            app:tabTextSize="12sp"
+            app:textColorNormal="@color/bottom_text_normal"
+            app:textColorSelected="@color/bottom_text_select"/>
+
+        <com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            app:paddingTexwithIcon="4dp"
+            app:tabIconNormal="@mipmap/foot_my_normal"
+            app:tabIconSelected="@mipmap/foot_my_select"
+            app:tabText="我的"
+            app:tabTextSize="12sp"
+            app:textColorNormal="@color/bottom_text_normal"
+            app:textColorSelected="@color/bottom_text_select"/>
+    </com.personal.noncommercial.significantproject.view.bottomtab.AlphaTabsIndicator>
+
+</LinearLayout>

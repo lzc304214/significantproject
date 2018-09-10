@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion rootProject.ext.compile_sdk
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "com.personal.noncommercial.significantproject"
+        minSdkVersion rootProject.ext.min_sdk
+        targetSdkVersion rootProject.ext.target_sdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            //   还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "2b7c9d6a099ca1d277fb32c8", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default",       //暂时填写默认值即可.
+        ]
+
+    }
+
+    greendao {
+        //数据库schema版本，也可以理解为数据库版本号
+        schemaVersion 1
+        //设置DaoMaster 、DaoSession、Dao包名
+        daoPackage 'com.personal.noncommercial.significantproject.greendao.db'
+        //设置DaoMaster 、DaoSession、Dao目录
+        targetGenDir 'src/main/java'
+        //设置生成单元测试目录
+        //targetGenDirTest
+        //设置自动生成单元测试用例
+        //generateTests
+    }
+
+    // 签名配置
+    signingConfigs {
+        release {
+            storeFile file("lzc.jks")
+            storePassword "adminlzc"
+            keyAlias "lizc"
+            keyPassword "adminlzc"
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            //混淆
+            minifyEnabled true
+            //Zipalign优化
+            zipAlignEnabled true
+            //资源压缩 开启了代码压缩后才会生效
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+
+        debug {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+//            //资源压缩
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
+        }
+
+
+    }
+
+    //Generate Signed APK: Errors while building APK.
+// You can find the errors in the 'Messages' view.
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    //开启Java1.8 能够使用lambda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //让所有的第三方包强制使用指定版本的support包
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion "${rootProject.ext.support}"
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.support}"
+    implementation "com.android.support:design:${rootProject.ext.support}"
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.github.2tu.fit:fit:1.0.1'
+    annotationProcessor 'com.github.2tu.fit:fit-compiler:1.0.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.yalantis:ucrop:2.2.1'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.lovetuzitong:MultiImageSelector:1.2'
+    implementation 'top.zibin:Luban:1.1.3'
+    implementation 'cn.jiguang.sdk:jpush:3.1.1'
+    implementation 'cn.jiguang.sdk:jcore:1.1.9'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation files('libs/alipaySdk-20180403.jar')
+    implementation files('libs/libammsdk.jar')
+    implementation 'com.alibaba:fastjson:1.1.68.android'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/Amap_2DMap_V5.2.0_20170627.jar')
+    implementation files('libs/AMap_Location_V4.0.1_20180426.jar')
+    implementation 'info.hoang8f:android-segmented:1.0.6'
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+}

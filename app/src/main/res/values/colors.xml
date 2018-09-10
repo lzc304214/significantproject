@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#06B8DC</color>
+    <color name="colorPrimaryDark">#06B8DC</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--背景色-->
+    <color name="bg_common">#F2F2F2</color>
+    <!--灰色圆-->
+    <color name="gray_round">#867272</color>
+    <color name="gray_round_tran">#55867272</color>
+    <!--红色圆-->
+    <color name="red_round">#B31C1C</color>
+
+    <!--立即体验按钮-->
+    <color name="now_express_press">#94861c</color>
+    <color name="now_express_normal">#a10a0a</color>
+    <!--白色-->
+    <color name="white">#FFFFFF</color>
+    <!--黑色-->
+    <color name="black">#000000</color>
+
+    <!--底部tab的文字颜色-->
+    <color name="bottom_text_select">#06B8DC</color>
+    <color name="bottom_text_normal">#BFBFBF</color>
+</resources>

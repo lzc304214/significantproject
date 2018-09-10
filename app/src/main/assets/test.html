@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script type="text/javascript">
+
+ function javaCallJs(){
+   document.getElementById("content").innerHTML=
+    "<br\>java调用了js无参函数";
+ }
+
+ function javaCallJs(arg){
+   document.getElementById("content").innerHTML =
+    ("欢迎："+arg );
+ }
+
+    </script>
+</head>
+<body>
+<div align="left" id="content">程序员IT</div>
+
+<input type="button" value="点击Android被调用" onclick="javascript:android.showToast()"/>
+</body>
+</html>

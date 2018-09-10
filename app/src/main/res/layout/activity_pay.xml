@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_alipay"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:drawableLeft="@mipmap/pay_alipay"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="支付宝支付"
+        android:textColor="@color/gray_round"
+        android:textSize="20sp"/>
+
+    <View
+        style="@style/style_line"/>
+
+    <TextView
+        android:id="@+id/tv_wxpay"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:drawableLeft="@mipmap/pay_wechat"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="微信支付"
+        android:textColor="@color/gray_round"
+        android:textSize="20sp"/>
+
+
+</LinearLayout>

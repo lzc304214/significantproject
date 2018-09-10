@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <external-path
+            name="camerapath"
+            path=""/>
+        <files-path
+            name="camerapath"
+            path=""/>
+        <cache-path
+            name="camerapath"
+            path=""/>
+        <root-path
+            name="camerapath"
+            path=""/>
+    </paths>
+</resources>

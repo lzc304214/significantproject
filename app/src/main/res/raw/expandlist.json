@@ -1,0 +1,60 @@
+{
+  "code": 1,
+  "data": [
+    {
+      "address": "江苏",
+      "itemData": [
+        {
+          "include": "南京区"
+        },
+        {
+          "include": "苏州区"
+        },
+        {
+          "include": "无锡区"
+        },
+        {
+          "include": "苏中区"
+        },
+        {
+          "include": "太仓区"
+        }
+      ]
+    },
+    {
+      "address": "安徽",
+      "itemData": [
+        {
+          "include": "合肥区"
+        },
+        {
+          "include": "阜阳区"
+        },
+        {
+          "include": "安庆区"
+        },
+        {
+          "include": "芜湖区"
+        },
+        {
+          "include": "马鞍山区"
+        }
+      ]
+    },
+    {
+      "address": "上海",
+      "itemData": [
+        {
+          "include": "宝山区"
+        },
+        {
+          "include": "青浦区"
+        },
+        {
+          "include": "漕泾区"
+        }
+      ]
+    }
+  ],
+  "msg": "成功"
+}
