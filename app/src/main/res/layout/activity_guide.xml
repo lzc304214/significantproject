@@ -28,8 +28,6 @@
             android:layout_height="wrap_content"
             android:contentDescription="@null"
             android:src="@drawable/round_red"/>
-
-
     </FrameLayout>
 
     <Button

@@ -8,7 +8,7 @@ import com.personal.noncommercial.significantproject.utils.listener.OnDelayListe
  * @author :lizhengcao
  * @date :2018/8/7
  * E-mail:lizc@bsoft.com.cn
- * @类说明 延时去做工具类
+ * @类说明 延时去做
  */
 
 public class DelayToDoUtil {
