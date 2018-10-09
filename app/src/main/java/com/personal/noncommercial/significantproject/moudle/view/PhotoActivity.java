@@ -1,9 +1,5 @@
 package com.personal.noncommercial.significantproject.moudle.view;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -18,11 +14,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -35,33 +28,30 @@ import com.personal.noncommercial.significantproject.pop.PopupWindowPhotoImp;
 import com.personal.noncommercial.significantproject.utils.AnimationUtil;
 import com.personal.noncommercial.significantproject.utils.BarUtil;
 import com.personal.noncommercial.significantproject.utils.CountDownUtil;
+import com.personal.noncommercial.significantproject.utils.DataUtil;
 import com.personal.noncommercial.significantproject.utils.DelayToDoUtil;
 import com.personal.noncommercial.significantproject.utils.DensityUtils;
+import com.personal.noncommercial.significantproject.utils.EncodeUtil;
+import com.personal.noncommercial.significantproject.utils.EncryptUtil;
+import com.personal.noncommercial.significantproject.utils.FileUtil;
 import com.personal.noncommercial.significantproject.utils.MD5Util;
 import com.personal.noncommercial.significantproject.utils.ToastUtils;
 import com.personal.noncommercial.significantproject.utils.listener.OnDelayListener;
 import com.personal.noncommercial.significantproject.utils.listener.OnUpdateListener;
 import com.yalantis.ucrop.UCrop;
 
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindColor;
 import butterknife.BindString;
 import butterknife.BindView;
-import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import info.hoang8f.android.segmented.SegmentedGroup;
-import me.nereo.multi_image_selector.utils.FileUtils;
-import top.zibin.luban.Luban;
 
 /**
  * @author :lizhengcao
@@ -117,6 +107,26 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
     private static final String childSuffixCrop = "/temp/crop/";
     private static final String childSuffixSave = "/temp/save/";
 
+    private String encodingAndDecoding = "大家好，我是编码与解码的试验品";
+
+
+    private String[] money = {"0.03", "0.06", "0.24"};
+
+    private String getTotalCost() {
+        Double totalMoney = 0.00;
+        if (money != null && money.length > 0) {
+            for (int i = 0; i < money.length; i++) {
+                String hjje = money[i];
+                if (DataUtil.isDouble(hjje)) {
+
+                    totalMoney += DataUtil.stringToDouble(hjje);
+                }
+
+            }
+
+        }
+        return DataUtil.getAmountValue(String.valueOf(totalMoney));
+    }
 
     @Override
     @SuppressLint("SetTextI18n")
@@ -125,9 +135,20 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
         //切记不要放布局文件，用动态代码表示，否则会出问题
         rbFirst.setChecked(true);
         //MD5算法演示
-        tvMd5.setText(MD5Util.Md5("13339053971") +
+        //编码
+        String encode = EncodeUtil.urlEncode(encodingAndDecoding);
+        //解码
+        String decode = EncodeUtil.urlDecode(encode);
+
+        tvMd5.setText("MD5Util：" + MD5Util.Md5("13339053971") +
+                "\nEncryptUtil:" + EncryptUtil.encryptMD5ToString("13339053971") +
                 "\n状态栏高度：" + BarUtil.getStatusBarHeight(mContext) +
-                "\nActionBar的高度：" + BarUtil.getActionBarHeight(this));
+                "\nActionBar的高度：" + BarUtil.getActionBarHeight(this) +
+                "\n原文：" + encodingAndDecoding +
+                "\n编码：" + encode +
+                "\n解码：" + decode + "\n" + getTotalCost() +
+                "\nSD卡根目录path：" + FileUtil.getRootPath() +
+                "\n缓存目录：" + FileUtil.getCacheFolder(mContext));
         //透明状态栏和导航栏的设置
         BarUtil.setTransparentStatusBar(this);
 

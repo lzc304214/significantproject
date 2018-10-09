@@ -22,7 +22,6 @@ import com.personal.noncommercial.significantproject.R;
 public class Html5WebView extends WebView {
 
     private ProgressBar mProgressBar;
-    //    boolean isNotTop = true;
     private Context mContext;
     private WebsiteChangeListener mWebsiteChangeListener;
 
@@ -187,16 +186,9 @@ public class Html5WebView extends WebView {
 
             if (newProgress == 100) {
                 mProgressBar.setVisibility(GONE);
-//                isNotTop = true;
             } else {
                 if (mProgressBar.getVisibility() == GONE)
                     mProgressBar.setVisibility(VISIBLE);
-//                if (isNotTop && mProgressBar.getVisibility() == VISIBLE) {
-//                    if (mWebsiteChangeListener != null) {
-//                        mWebsiteChangeListener.onWebsiteChangeBackTop();
-//                        isNotTop = false;
-//                    }
-//                }
                 mProgressBar.setProgress(newProgress);
             }
             super.onProgressChanged(view, newProgress);
@@ -215,7 +207,6 @@ public class Html5WebView extends WebView {
         void onWebsiteChange(String title);
 
         void onUrlChange(String url);
-//        void onWebsiteChangeBackTop();
     }
 
     public void setWebsiteChangeListener(WebsiteChangeListener websiteChangeListener) {
@@ -230,7 +221,6 @@ public class Html5WebView extends WebView {
         lp.y = t;
         mProgressBar.setLayoutParams(lp);
         super.onScrollChanged(l, t, oldl, oldt);
-
     }
 
 

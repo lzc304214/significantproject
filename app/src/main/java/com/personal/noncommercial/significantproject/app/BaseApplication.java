@@ -1,21 +1,17 @@
 package com.personal.noncommercial.significantproject.app;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Vibrator;
 import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 
-import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.personal.noncommercial.significantproject.greendao.UserDao;
 import com.personal.noncommercial.significantproject.utils.SpUtils;
 import com.personal.noncommercial.significantproject.utils.Utils;
 
 import cn.jpush.android.api.JPushInterface;
-import dalvik.system.DexClassLoader;
 
 /**
  * @author :lizhengcao

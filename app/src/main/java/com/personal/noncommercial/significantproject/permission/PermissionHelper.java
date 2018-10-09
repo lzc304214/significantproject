@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -47,9 +46,8 @@ public class PermissionHelper {
                         ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) !=
                                 PackageManager.PERMISSION_GRANTED ||
                         ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                                PackageManager.PERMISSION_GRANTED
-                        ) {
-                    //未授权
+                                PackageManager.PERMISSION_GRANTED) {
+                    //未授权 Rationale合理
                     if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION) ||
                             ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_PHONE_STATE) ||
                             ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
