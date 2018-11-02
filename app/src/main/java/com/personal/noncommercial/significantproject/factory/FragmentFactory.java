@@ -1,15 +1,12 @@
 package com.personal.noncommercial.significantproject.factory;
 
 
-import android.support.v4.app.Fragment;
-
 import com.personal.noncommercial.significantproject.moudle.base.BaseFragment;
 import com.personal.noncommercial.significantproject.moudle.fragment.HomeFragment;
 import com.personal.noncommercial.significantproject.moudle.fragment.MessageFragment;
 import com.personal.noncommercial.significantproject.moudle.fragment.MyFragment;
 import com.personal.noncommercial.significantproject.moudle.fragment.QueryFragment;
 
-import java.text.BreakIterator;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/retrofitnetworklib/retrofitnetworklib.iml" filepath="$PROJECT_DIR$/retrofitnetworklib/retrofitnetworklib.iml" />
       <module fileurl="file://$PROJECT_DIR$/significantproject.iml" filepath="$PROJECT_DIR$/significantproject.iml" />
     </modules>
   </component>

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">retrofitnetworklib</string>
+    <string name="network_close">Please check your network settings </string>
+    <string name="network_connect_error">Unable to connect network </string>
+    <string name="network_parse_error">Analytical anomaly </string>
+    <string name="network_permissions_error">Permission error</string>
+    <string name="network_connect_fail">Network anomaly</string>
+    <string name="network_fail">Server to return error </string>
+    <string name="network_unknow_error">Server unknown error</string>
+</resources>

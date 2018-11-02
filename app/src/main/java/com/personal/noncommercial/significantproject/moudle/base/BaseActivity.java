@@ -170,7 +170,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void lauch(Class clazz) {
         startActivity(new Intent(mContext, clazz));
-
     }
 
     /**

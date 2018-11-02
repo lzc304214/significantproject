@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.personal.noncommercial.significantproject.R;
 import com.personal.noncommercial.significantproject.app.Constant;
 import com.personal.noncommercial.significantproject.moudle.base.BaseActivity;
+import com.personal.noncommercial.significantproject.moudle.bean.Person;
 import com.personal.noncommercial.significantproject.moudle.inter.OnCameraAndAlbum;
 import com.personal.noncommercial.significantproject.permission.PermissionHelper;
 import com.personal.noncommercial.significantproject.pop.PopupWindowPhotoImp;
@@ -147,13 +148,26 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
                 "\n原文：" + encodingAndDecoding +
                 "\n编码：" + encode +
                 "\n解码：" + decode + "\n" + getTotalCost() +
-                "\nSD卡根目录path：" + FileUtil.getRootPath() +
-                "\n缓存目录：" + FileUtil.getCacheFolder(mContext));
+                "\nSD卡根目录path：" + FileUtil.getRootPath().getPath() +
+                "=====\nAbsolutePath：" + FileUtil.getRootPath().getAbsolutePath() +
+                "\n缓存目录：" + FileUtil.getCacheFolder(mContext).getPath() +
+                "====\nAbsolutePath：" + FileUtil.getCacheFolder(mContext).getAbsolutePath() +
+                "\nperson：姓名-" + getPerson().getName() + "\n年龄-" + getPerson().getAge());
         //透明状态栏和导航栏的设置
         BarUtil.setTransparentStatusBar(this);
 
         //卡片翻转效果
         AnimationUtil.cardFilpAnimation(tvBeforeView, tvAfterView);
+    }
+
+    private Person getPerson() {
+        //构建者Builder模式
+        return new Person.Builder()
+                .setAge(18)
+                .setGender("男")
+                .setName("小明")
+                .setHobby("篮球")
+                .build();
     }
 
     private void delayDo() {

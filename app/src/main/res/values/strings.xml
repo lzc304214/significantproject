@@ -15,6 +15,14 @@
     <string name="compress_pic">压缩图片</string>
     <string name="verification">获取验证码</string>
 
+    <!--网络请求服务器过程字段-->
+    <string name="network_close">Please check your network settings </string>
+    <string name="network_connect_error">Unable to connect network </string>
+    <string name="network_parse_error">Analytical anomaly </string>
+    <string name="network_permissions_error">Permission error</string>
+    <string name="network_connect_fail">Network anomaly</string>
+    <string name="network_fail">Server to return error </string>
+    <string name="network_unknow_error">Server unknown error</string>
 
     <string-array name="main_tab_fragment_title">
         <item>首页</item>
