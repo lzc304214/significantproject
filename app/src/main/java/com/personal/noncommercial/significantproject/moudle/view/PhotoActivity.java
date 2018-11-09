@@ -1,6 +1,7 @@
 package com.personal.noncommercial.significantproject.moudle.view;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -26,6 +27,9 @@ import com.personal.noncommercial.significantproject.moudle.bean.Person;
 import com.personal.noncommercial.significantproject.moudle.inter.OnCameraAndAlbum;
 import com.personal.noncommercial.significantproject.permission.PermissionHelper;
 import com.personal.noncommercial.significantproject.pop.PopupWindowPhotoImp;
+import com.personal.noncommercial.significantproject.retrofitutil.model.ResultModel;
+import com.personal.noncommercial.significantproject.retrofitutil.net.ApiService;
+import com.personal.noncommercial.significantproject.retrofitutil.net.OnResponseListener;
 import com.personal.noncommercial.significantproject.utils.AnimationUtil;
 import com.personal.noncommercial.significantproject.utils.BarUtil;
 import com.personal.noncommercial.significantproject.utils.CountDownUtil;
@@ -46,6 +50,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.logging.Logger;
 
 import butterknife.BindColor;
 import butterknife.BindString;
@@ -53,6 +61,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import info.hoang8f.android.segmented.SegmentedGroup;
+import me.nereo.multi_image_selector.MultiImageSelector;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 
 /**
  * @author :lizhengcao
@@ -155,7 +168,6 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
                 "\nperson：姓名-" + getPerson().getName() + "\n年龄-" + getPerson().getAge());
         //透明状态栏和导航栏的设置
         BarUtil.setTransparentStatusBar(this);
-
         //卡片翻转效果
         AnimationUtil.cardFilpAnimation(tvBeforeView, tvAfterView);
     }
@@ -227,13 +239,12 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
      * 创建临时文件夹
      */
     private File createTempFile(String childSuffix) {
-        File file = new File(Constant.APP_PATH, childSuffix + System.currentTimeMillis());
+        File file = new File(Constant.APP_PATH, childSuffix + System.currentTimeMillis() + ".jpg");
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
         }
         return file;
     }
-
 
     @Override
     public void onCamera() {
@@ -246,26 +257,27 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
     /**
      * 对相机的操作
      */
+    private Uri outputFileUri;
+
     private void camera() {
         //权限全部核查通过，或者是api<23
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Environment.getExternalStorageDirectory() 获取手机的根目录
-
         tempFile = createTempFile(childSuffixCamera);
         //相机uri
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //Fix the Android N+ file can't be send
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            tempUri = FileProvider.getUriForFile(mContext,
+            outputFileUri = FileProvider.getUriForFile(mContext,
                     getApplicationContext().getPackageName() + ".provider", tempFile);
 
         } else {
-            tempUri = Uri.fromFile(tempFile);
+            outputFileUri = Uri.fromFile(tempFile);
         }
 
         // 指定照片保存路径（SD卡）,每次拍照后这个图片都会被替换
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
         startActivityForResult(intent, REQUEST_CAMERA_CODE);
     }
 
@@ -288,7 +300,7 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
      * 对相册的操作
      */
     public void album() {
-        //真机开发使用，Intent.ACTION_GET_CONTENT  模拟机器中使用：Intent.ACTION_PICK
+//        //真机开发使用，Intent.ACTION_GET_CONTENT  模拟机器中使用：Intent.ACTION_PICK
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -326,7 +338,7 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
             switch (requestCode) {
                 case REQUEST_CAMERA_CODE:
                     //相机
-                    startPhotoZoom(tempUri);
+                    startPhotoZoom(outputFileUri);
                     break;
                 case REQUEST_ALBUM_CODE:
                     //相册
@@ -337,16 +349,32 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
                     }
                     break;
                 case UCrop.REQUEST_CROP:
+                    //相机或者相册得到图片的裁剪
                     if (data != null) {
                         Uri resultUri = UCrop.getOutput(data);
-                        Bitmap bitmap = BitmapFactory.decodeFile(resultUri.getPath());
-                        mCircleIvHeader.setImageBitmap(bitmap);
+                        Glide.with(this)
+                                .load(resultUri)
+                                .asBitmap()
+                                .placeholder(R.mipmap.avatar_none)
+                                .into(mCircleIvHeader);
+                        Log.e("裁剪过会的图片：", cropFile.getName());
+//                        cropFile.getName();
+                        //上传头像的功能 此时只有一张图片
+//                        RequestBody body = RequestBody.create(MediaType.parse("image/*"), cropFile);
+//                        MultipartBody.Part part = MultipartBody.Part.createFormData("filename", cropFile.getName(), body);
+//                        Call<ResultModel<Object>> call = ApiService.newInstance().getApiInterface().uploadPicture("第一个字段", part);
+//                        call.enqueue(new OnResponseListener<ResultModel<Object>>(mContext) {
+//                            @Override
+//                            public void onSuccess(ResultModel<Object> result) {
+//
+//                            }
+//
+//                            @Override
+//                            protected boolean needLoadingDialog() {
+//                                return false;
+//                            }
+//                        });
 
-                        File postPicFile = createTempFile(childSuffixSave);
-                        //采用android自带的压缩方法
-                        saveBitmapToFile(bitmap, postPicFile);
-                        Glide.with(this).load(postPicFile).into(mIvPic);
-                        Log.e(TAG, "onActivityResult: " + postPicFile.getAbsolutePath() + "\n" + postPicFile.getName());
                     } else {
                         ToastUtils.showToastShort("裁剪图片失败");
                     }
@@ -361,32 +389,21 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
      *
      * @param uri
      */
+    private File cropFile;
+
     private void startPhotoZoom(Uri uri) {
         Log.e(TAG, "startPhotoZoom: " + uri);
         int photoSize = DensityUtils.dp2px(70);
         UCrop.Options options = new UCrop.Options();
         options.setToolbarColor(colorPrimary);
         options.setStatusBarColor(colorPrimary);
-
+        cropFile = createTempFile(childSuffixCrop);
         UCrop.of(uri,
-                Uri.fromFile(createTempFile(childSuffixCrop)))
+                Uri.fromFile(cropFile))
                 .withMaxResultSize(photoSize, photoSize)
                 .withAspectRatio(1, 1)
                 .withOptions(options)
                 .start(this);
-    }
-
-    //把bitmap转化为File
-    private void saveBitmapToFile(Bitmap bitmap, File tempFile) {
-        // compress(CompressFormat format, int quality, OutputStream stream)
-        // quality 压缩的质量   100
-        try {
-            OutputStream os = new FileOutputStream(tempFile);
-
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, os);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
 }

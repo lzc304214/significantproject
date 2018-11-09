@@ -3,10 +3,16 @@ package com.personal.noncommercial.significantproject.retrofitutil.net;
 import com.personal.noncommercial.significantproject.retrofitutil.model.ResultModel;
 import com.personal.noncommercial.significantproject.retrofitutil.model.UpdateModel;
 
+import java.util.List;
+import java.util.Map;
+
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
+import retrofit2.http.Url;
 
 
 public class ApiService {
@@ -43,38 +49,27 @@ public class ApiService {
 
     public interface ApiInterface {
 
-//        "version",
-//                new BsoftNameValuePair("appcode", "android_pub"),
-//                    new BsoftNameValuePair("appversion", AppInfoUtil
-//                .getVersionCode(mContext) + ""));
 
         @Multipart
         @POST("api/version")
         Call<ResultModel<UpdateModel>> getNewAppVersion(
                 @Part("appcode") String code,
                 @Part("appversion") String version);
-//
-//        @Multipart
-//        @POST("index.php?app=friends&act=delFriend&")
-//        Call<ResultModel<Object>> deletefriends(
-//                @Part("username") String username,
-//                @Part("password") String password,
-//                @Part("friend_id") int friend_id);
-//        @Multipart
-//        @POST("query")
-//        Call<ResultModel<Enty>> deletefriends(
-//                @Part("key") String key,
-//                @Part("word") String word
-//        );
-//        //发布帖子
-//        @Multipart
-//        @POST("phone.php?app=forum&act=add")
-//        Call<ResultModel<Object>> addForum(
-//                @Part("username") String username,
-//                @Part("password") String password,
-//                @Part() List<MultipartBody.Part> parts
-//
-//        ); //发布帖子
+
+
+        @Multipart
+        @POST("api/uploadPic")
+        Call<ResultModel<Object>> uploadPicture(
+                @Part("username") String userName,
+                @Part MultipartBody.Part pic);
+
+        @Multipart
+        @POST("api/uploadMorePic")
+        Call<ResultModel<Object>> uploadMorePicture(
+                @Part String userName,
+                @Part List<MultipartBody.Part> pics);
+
+
     }
 
 }

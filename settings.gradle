@@ -1,1 +1,1 @@
-include ':app', ':retrofitnetworklib'
+include ':app', ':retrofitnetworklib', ':matisse'

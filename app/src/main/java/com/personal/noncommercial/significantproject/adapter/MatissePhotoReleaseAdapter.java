@@ -7,40 +7,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.personal.noncommercial.significantproject.R;
 import com.personal.noncommercial.significantproject.moudle.inter.OnPhotoJiuGongPic;
 import com.personal.noncommercial.significantproject.moudle.view.PhotoActivity2;
-import com.personal.noncommercial.significantproject.utils.DensityUtils;
 import com.personal.noncommercial.significantproject.view.SquaredImageView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author :lizhengcao
  * @date :2018/4/10
  * E-mail:lizc@bsoft.com.cn
- * @类说明 多图片的选择器的适配器
+ * @类说明 知乎多图片的选择器的适配器
  */
 
-public class PhotoReleaseAdapter extends RecyclerView.Adapter<PhotoReleaseAdapter.PhotoViewHolder> {
+public class MatissePhotoReleaseAdapter extends RecyclerView.Adapter<MatissePhotoReleaseAdapter.PhotoViewHolder> {
 
 
     private Context mContext;
 
-    private ArrayList<String> mSelectPath;
+    private List<String> mMatisseSelectPath;
     private OnPhotoJiuGongPic mPhotoJiuGongPicListener;
 
-    public PhotoReleaseAdapter(Context context, ArrayList<String> selectPath, OnPhotoJiuGongPic photoJiuGongPicListener) {
+    public MatissePhotoReleaseAdapter(Context context, List<String> matisseSelectPath, OnPhotoJiuGongPic photoJiuGongPicListener) {
         this.mContext = context;
-        this.mSelectPath = selectPath;
+        this.mMatisseSelectPath = matisseSelectPath;
         this.mPhotoJiuGongPicListener = photoJiuGongPicListener;
     }
 
@@ -54,43 +50,37 @@ public class PhotoReleaseAdapter extends RecyclerView.Adapter<PhotoReleaseAdapte
     public void onBindViewHolder(PhotoViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         Glide.with(mContext)
-                .load(position == mSelectPath.size() ? "" : mSelectPath.get(position))
+                .load(position == mMatisseSelectPath.size() ? "" : mMatisseSelectPath.get(position))
                 .asBitmap()
                 .placeholder(R.mipmap.release_add_img)
                 .into(holder.mSquaredImageView);
 
-        if (position == mSelectPath.size()) {
+        if (position == mMatisseSelectPath.size()) {
             holder.mIvDelete.setVisibility(View.GONE);
         } else {
             holder.mIvDelete.setVisibility(View.VISIBLE);
         }
 
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //显示popWindow
-                if (mSelectPath.size() == position) {
-                    mPhotoJiuGongPicListener.showPopWindow();
-                }
+        holder.itemView.setOnClickListener(v -> {
+            //显示popWindow
+            if (mMatisseSelectPath.size() == position) {
+                mPhotoJiuGongPicListener.showPopWindow();
             }
         });
 
         //删除图片
-        holder.mIvDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mPhotoJiuGongPicListener.showCustomDialog(position);
-            }
-        });
+        holder.mIvDelete.setOnClickListener(v ->
+                mPhotoJiuGongPicListener.showCustomDialog(position));
     }
 
     @Override
     public int getItemCount() {
 
-        return mSelectPath.size() == PhotoActivity2.MAX_COUNT ?
-                mSelectPath.size() : mSelectPath.size() + 1;
+        return mMatisseSelectPath.size() == PhotoActivity2.MAX_COUNT ?
+                mMatisseSelectPath.size() : mMatisseSelectPath.size() + 1;
     }
+
 
     class PhotoViewHolder extends RecyclerView.ViewHolder {
 
@@ -102,8 +92,6 @@ public class PhotoReleaseAdapter extends RecyclerView.Adapter<PhotoReleaseAdapte
         public PhotoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-//            mSquaredImageView = (SquaredImageView) itemView.findViewById(R.id.squared_image_view);
-//            mIvDelete = (ImageView) itemView.findViewById(R.id.iv_delete);
         }
     }
 

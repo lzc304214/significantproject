@@ -9,6 +9,9 @@ import android.widget.TextView;
 import com.personal.noncommercial.significantproject.R;
 import com.personal.noncommercial.significantproject.moudle.inter.OnCameraAndAlbum;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * @author :lizhengcao
  * @date :2018/4/2
@@ -73,8 +76,6 @@ public class PopupWindowPhotoImp {
             }
         });
     }
-
-
 
 
 }

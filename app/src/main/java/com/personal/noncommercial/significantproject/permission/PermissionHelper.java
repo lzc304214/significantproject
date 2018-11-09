@@ -20,7 +20,7 @@ import android.support.v7.app.AlertDialog;
 public class PermissionHelper {
     //定位
     public static final int REQUEST_LOCATION_PERMISSION = 1;
-    //相机
+    //相机和相册
     public static final int REQUEST_CAMERA_AND_WRITE_ES_PERMISSION = 2;
     //相册
     public static final int REQUEST_WRITE_ES_PERMISSION = 3;
@@ -69,7 +69,7 @@ public class PermissionHelper {
                 }
                 break;
             case REQUEST_CAMERA_AND_WRITE_ES_PERMISSION:
-                //相机权限
+                //相册和相机权限
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) !=
                         PackageManager.PERMISSION_GRANTED ||
                         ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
