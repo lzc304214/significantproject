@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.personal.noncommercial.significantproject.R;
 import com.personal.noncommercial.significantproject.app.Constant;
@@ -43,6 +46,7 @@ import com.personal.noncommercial.significantproject.utils.MD5Util;
 import com.personal.noncommercial.significantproject.utils.ToastUtils;
 import com.personal.noncommercial.significantproject.utils.listener.OnDelayListener;
 import com.personal.noncommercial.significantproject.utils.listener.OnUpdateListener;
+import com.personal.noncommercial.significantproject.utils.util.JsonUtils;
 import com.yalantis.ucrop.UCrop;
 
 
@@ -154,6 +158,34 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
         //解码
         String decode = EncodeUtil.urlDecode(encode);
 
+        String json = "{\n" +
+                "  \"msg\": \"测试信息\",\n" +
+                "  \"code\": 1,\n" +
+                "  \"data\": {\n" +
+                "    \"des\": \"原始数据解析测试\",\n" +
+                "    \"fuc\": \"想法检验\"\n" +
+                "  },\n" +
+                "  \"list\": [\n" +
+                "    {\n" +
+                "      \"info\": \"信息\",\n" +
+                "      \"info2\": \"信息2\",\n" +
+                "      \"index\": 1\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+        JSONObject jsonObject = JSONObject.parseObject(json);
+        String msg = jsonObject.getString("msg");
+        Integer code = jsonObject.getInteger("code");
+        JSONObject data = jsonObject.getJSONObject("data");
+        String des = data.getString("des");
+        JSONArray array = jsonObject.getJSONArray("list");
+        for (int i = 0; i < array.size(); i++) {
+            JSONObject o = array.getJSONObject(i);
+            String info = o.getString("info");
+            String info2 = o.getString("info2");
+            Integer index = o.getInteger("index");
+            Log.e("普通解析对象的方法===", "info=" + info + "&info2=" + info2 + "&index=" + index);
+        }
         tvMd5.setText("MD5Util：" + MD5Util.Md5("13339053971") +
                 "\nEncryptUtil:" + EncryptUtil.encryptMD5ToString("13339053971") +
                 "\n状态栏高度：" + BarUtil.getStatusBarHeight(mContext) +
@@ -165,11 +197,14 @@ public class PhotoActivity extends BaseActivity implements OnCameraAndAlbum {
                 "=====\nAbsolutePath：" + FileUtil.getRootPath().getAbsolutePath() +
                 "\n缓存目录：" + FileUtil.getCacheFolder(mContext).getPath() +
                 "====\nAbsolutePath：" + FileUtil.getCacheFolder(mContext).getAbsolutePath() +
-                "\nperson：姓名-" + getPerson().getName() + "\n年龄-" + getPerson().getAge());
+                "\nperson：姓名-" + getPerson().getName() + "\n年龄-" + getPerson().getAge() +
+                "\n把对象转化为json字符串：" + JsonUtils.toJsonString(getPerson()) + "\n" +
+                "msg=" + msg + "&code=" + code + "&des=" + des);
         //透明状态栏和导航栏的设置
         BarUtil.setTransparentStatusBar(this);
         //卡片翻转效果
         AnimationUtil.cardFilpAnimation(tvBeforeView, tvAfterView);
+
     }
 
     private Person getPerson() {

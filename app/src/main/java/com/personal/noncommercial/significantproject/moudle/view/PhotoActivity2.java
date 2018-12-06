@@ -2,32 +2,21 @@ package com.personal.noncommercial.significantproject.moudle.view;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.personal.noncommercial.significantproject.BuildConfig;
 import com.personal.noncommercial.significantproject.R;
 import com.personal.noncommercial.significantproject.adapter.MatissePhotoReleaseAdapter;
-import com.personal.noncommercial.significantproject.adapter.PhotoReleaseAdapter;
 import com.personal.noncommercial.significantproject.dialog.CustomDialogPhotoImp;
 import com.personal.noncommercial.significantproject.moudle.base.BaseActivity;
 import com.personal.noncommercial.significantproject.moudle.inter.OnCameraAndAlbum;
 import com.personal.noncommercial.significantproject.moudle.inter.OnPhotoJiuGongPic;
 import com.personal.noncommercial.significantproject.permission.PermissionHelper;
 import com.personal.noncommercial.significantproject.pop.PopupWindowPhotoImp;
-import com.personal.noncommercial.significantproject.retrofitutil.model.ResultModel;
-import com.personal.noncommercial.significantproject.retrofitutil.net.ApiService;
-import com.personal.noncommercial.significantproject.retrofitutil.net.OnResponseListener;
 import com.personal.noncommercial.significantproject.retrofitutil.ui.LoadingDialog;
 import com.personal.noncommercial.significantproject.utils.DensityUtils;
 import com.personal.noncommercial.significantproject.utils.FileUtil;
@@ -39,19 +28,15 @@ import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
-import me.nereo.multi_image_selector.utils.FileUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Call;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 

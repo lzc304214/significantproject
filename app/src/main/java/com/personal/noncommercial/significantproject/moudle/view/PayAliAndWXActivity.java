@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.personal.noncommercial.significantproject.permission.PermissionHelper
 import com.personal.noncommercial.significantproject.utils.StreamUtils;
 import com.personal.noncommercial.significantproject.utils.ToastUtils;
 import com.personal.noncommercial.significantproject.utils.Utils;
+import com.personal.noncommercial.significantproject.utils.util.JsonUtils;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -77,9 +79,9 @@ public class PayAliAndWXActivity extends BaseActivity {
     }
 
     /**
-     * 支付宝支付业务：入参app_id
+     * 支付宝支付业务：入参app_id APPID为真实账号，请勿付款
      */
-    public static final String APPID = "";
+    public static final String APPID = "2018112362304449";
     /** 商户私钥，pkcs8格式 */
     /** 如下私钥，RSA2_PRIVATE 或者 RSA_PRIVATE 只需要填入一个 */
     /** 如果商户两个都设置了，优先使用 RSA2_PRIVATE */
@@ -88,7 +90,7 @@ public class PayAliAndWXActivity extends BaseActivity {
     /**
      * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
      */
-    public static final String RSA2_PRIVATE = "";
+    public static final String RSA2_PRIVATE = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCtqvF0s7B1BOc1xt0OJZK180ivCqo5Vmeyg6MJwhABn35pCbedDxb+F8DPq7IAxJ8lNCqsiJfXQCy8RIQUjHrFPVTec4FT9klXoT26xpa49tNjI45WnyU3mNH4DfLrAgUWAak4YoHDeEpm2UvQVNWJ6+upAwQG7tvDBrZWiUFm/9t9EcKLf4Jd/9z6CeGbrXMRlUvi+VTXNzN7TirvDVFnF2fYl3GG0ZL3UURxqzMg4DdJnL417wEbna+oR3kjFMUjZ8P+/HCBUjJA7YsRBRxEVLt6Ngsyz0XJD5Rgfa/HoyGBEBMut1INHBrEnBhy6Onho/IGZAe9Z3wF/c20fBfxAgMBAAECggEAXMYPCura/whJg37ipCYKQ8zdLTUjTlIMP172/8V9y4AqhW49elePTtndlJMCGkrvQW6mxViK1OBhhYmMjXWmOCvVZKiLlBDjiT6HvXlNFy40KqfZ6AhIV3T55et9s3F2yhTFE2v8KjHefSbjyz0mffFcCQOlaRa8q2iwi3XzTFPM3xQG3pzos9sWhPDU43GzZPEcoNoN2uWJlKDdjvnFIbT+NEJkWXj1ssUlKjBaxUQbzFH45IWfEninHbap4niP+Ew/1Tn3222m3+CCWPJL686Ok37IeB6GI7zn3OtUIQSRPW3XCAu5LfBK+MuO5VR23La8jTb9LUKh1NA2IY3F4QKBgQDVdDRwcWRkhTIDBO6RVaYkOz9BSp1LI+l1fCAFU57VlRdHO5AlrVUDOEK0k1qSZkSx7xmpKYWPY8ISN2bXnl3jeN42jhSJ6CT/xy7v8pOR7oHAHb1wbEsj/jZJwwc68w2VJTbI0Ywee1YpWJLX9tj4mjZU8GKQUBOoyTJmyGndHQKBgQDQSJdQal3AFZWpZ30jK37e8Ppg+1FbXuVohBkdm9iRd96UZnIm+4IJfxGpr3KBa78QpdRP1b39pMooEBhHmW8SkFfqlm76dnJ8PpQqD8y/Ee8pCGZw/Km6u3xMQRnY2BbEfLss7QX872cGKoPV9/q8WD/JQIHwXnSxW1g2olXx5QKBgFwuzkLNRaz/tOSG6bzMP28gQyYgYiPEQ5ugWnfScCMPOzlhKNSMsc0tK+muRYw6LGqntu5OZ0bQr0yMrpZp52RIm7b1zzrrjacEz2mC2mZImbJtZZW6vwyxSaK7XlEADJqfsrQxgxDa9Q/wF6K7EWLzvokaM4bdflADbAflf4qlAoGAFCyz22oyIoT0ti/8AwgXhei5l+NAAiWy+uiwthl+ZLjDqoQx0mzSL7FLOLBx2u9g1m/5nLILcSIhIrhMYcMO6zFoEqT3ovMOK9Kz708QegF2tPbHVXJjzl6Sr6AurL5hli6uwq9CwTk/NW2wz2zxsISryQaij3HWw8chSEl5IbECgYBkqEzRxIZf1dCVuptCG72OshoRGbudI+uJQU49/VE1ulGzYPcgEwQZBCRVFSMbIQgEyoHSbz3v1GXNtBQ4W2gWz/0Pcd8W2uz7/DmLWY8q1vFG4sIILXnfKIAUVzVQJCDov3UEq9YdGzanjpFg98b3URFZQXPDTuZRzSkb+B2f+Q==";
     public static final String RSA_PRIVATE = "";
 
     private static final int ALIPAY_TYPE = 1;
@@ -142,13 +144,15 @@ public class PayAliAndWXActivity extends BaseActivity {
 
     /**
      * 微信支付过程，，，，因为是个人测试，所以没法通过，大致流程基本是这样，业务逻辑根据自己的需求来添加
-     *
-     * @param
+     * 此维信支付是调不起来（签名和包名与实际账号不一致啊，大致流程是如下）
      */
     private void getWXPay() {
         String json = StreamUtils.get(Utils.getContext(), R.raw.wxpay);
-        WXPayResult wxPayResult = new Gson().fromJson(json, WXPayResult.class);
+        Log.e("json", json);
+        WXPayResult wxPayResult = JsonUtils.parseObject(json, WXPayResult.class);
+//        WXPayResult wxPayResult = new Gson().fromJson(json, WXPayResult.class);
         mIWXApi = WXAPIFactory.createWXAPI(this, null);
+        //将该app注册到微信
         mIWXApi.registerApp(wxPayResult.getAppid());
         if (!(mIWXApi.isWXAppInstalled() && mIWXApi.isWXAppSupportAPI())) {
             ToastUtils.showToastShort("请安装微信客户端后使用微信支付，谢谢合作~");
@@ -188,6 +192,7 @@ public class PayAliAndWXActivity extends BaseActivity {
          *
          * orderInfo的获取必须来自服务端；
          */
+        Log.e("=======", "3");
         boolean rsa2 = (RSA2_PRIVATE.length() > 0);
 
         Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(APPID, rsa2);
@@ -200,7 +205,7 @@ public class PayAliAndWXActivity extends BaseActivity {
         String orderInfo = orderParam + "&" + sign;
 
 //                final String orderInfo = "app_id=2015052600090779&biz_content=%7B%22timeout_express%22%3A%2230m%22%2C%22seller_id%22%3A%22%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22total_amount%22%3A%220.02%22%2C%22subject%22%3A%221%22%2C%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22314VYGIAGG7ZOYY%22%7D&charset=utf-8&method=alipay.trade.app.pay&sign_type=RSA2&timestamp=2016-08-15%2012%3A12%3A15&version=1.0&sign=MsbylYkCzlfYLy9PeRwUUIg9nZPeN9SfXPNavUCroGKR5Kqvx0nEnd3eRmKxJuthNUx4ERCXe552EV9PfwexqW%2B1wbKOdYtDIb4%2B7PL3Pc94RZL0zKaWcaY3tSL89%2FuAVUsQuFqEJdhIukuKygrXucvejOUgTCfoUdwTi7z%2BZzQ%3D\n";   // 订单信息
-        final Runnable payRunnable = () -> {
+        Runnable payRunnable = () -> {
             PayTask payTask = new PayTask(PayAliAndWXActivity.this);
             Map<String, String> result = payTask.payV2(orderInfo, true);
             Message msg = new Message();

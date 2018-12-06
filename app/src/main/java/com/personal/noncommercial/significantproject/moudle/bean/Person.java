@@ -71,6 +71,7 @@ public class Person implements Parcelable {
         dest.writeString(hobby);
     }
 
+
     public static class Builder {
 
         private Person mPerson;

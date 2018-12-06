@@ -33,7 +33,7 @@ public class H5CallActivity extends BaseActivity {
 
             @Override
             public void onUrlChange(String url) {
-
+                mHtml5WebView.loadUrl(url);
             }
         });
     }
