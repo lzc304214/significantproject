@@ -23,4 +23,5 @@
     <!--底部tab的文字颜色-->
     <color name="bottom_text_select">#06B8DC</color>
     <color name="bottom_text_normal">#BFBFBF</color>
+    <color name="gray">#b7b7b7</color>
 </resources>

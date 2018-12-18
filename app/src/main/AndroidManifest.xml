@@ -173,6 +173,10 @@
             android:name=".moudle.view.GaoDeLocationActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".moudle.view.LeftAndRightActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".receiver.CusJpushReceiver"
