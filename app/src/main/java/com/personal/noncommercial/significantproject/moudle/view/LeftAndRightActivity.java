@@ -43,7 +43,6 @@ public class LeftAndRightActivity extends BaseActivity implements OnLeftAndRight
     int gray;
     private int leftCurrentPos;
 
-
     @Override
     protected void initOnCreate(@Nullable Bundle savedInstanceState) {
         setCurrentTitle("左右列表数据");
