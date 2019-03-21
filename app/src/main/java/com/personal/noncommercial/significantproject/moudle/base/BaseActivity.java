@@ -36,7 +36,6 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-
     private Unbinder bind;
     protected Context mContext;
     private LinearLayout mRootView;
@@ -53,8 +52,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.setContentView(R.layout.activity_base);
         //初始化父类对象
         initParentView();
-
         setContentView(getRootLayout());
+        //注册eventBus
+        if (isRegisterEventBus())
+            EventBus.getDefault().register(this);
         app = (BaseApplication) getApplication();
         //绑定控件
         bind = ButterKnife.bind(this);
@@ -113,6 +114,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 是否注册事件分发
+     *
+     * @return true绑定EventBus事件分发，默认不绑定，子类需要绑定的话复写此方法返回true.
+     */
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    /**
      * 设置当前页面的标题
      *
      * @param msg
@@ -144,6 +154,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (isRegisterEventBus())
+            //反注册eventBus
+            EventBus.getDefault().unregister(this);
         if (bind != null)
             //解除绑定
             bind.unbind();

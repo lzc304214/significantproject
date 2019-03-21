@@ -82,7 +82,7 @@ public class MatissePhotoReleaseAdapter extends RecyclerView.Adapter<MatissePhot
     }
 
 
-    class PhotoViewHolder extends RecyclerView.ViewHolder {
+    static class PhotoViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.squared_image_view)
         SquaredImageView mSquaredImageView;

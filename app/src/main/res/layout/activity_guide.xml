@@ -34,11 +34,11 @@
         android:id="@+id/btn_now_experience"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="@string/now_experience"
-        android:visibility="gone"
-        android:textColor="@color/white"
         android:layout_gravity="bottom|center_horizontal"
-        android:background="@drawable/bg_now_experience"/>
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/bg_now_experience"
+        android:text="@string/now_experience"
+        android:textColor="@color/white"
+        android:visibility="gone"/>
 
 </FrameLayout>

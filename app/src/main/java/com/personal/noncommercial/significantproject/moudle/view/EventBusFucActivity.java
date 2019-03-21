@@ -30,7 +30,7 @@ public class EventBusFucActivity extends BaseActivity {
     @Override
     protected void initOnCreate(@Nullable Bundle savedInstanceState) {
         setCurrentTitle("eventBus注册类");
-        EventBus.getDefault().register(this);
+
     }
 
     @OnClick(R.id.btn_next)
@@ -45,6 +45,11 @@ public class EventBusFucActivity extends BaseActivity {
     }
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
     protected int getRootLayout() {
         return R.layout.activity_eventbus;
     }
@@ -52,7 +57,6 @@ public class EventBusFucActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 }
 

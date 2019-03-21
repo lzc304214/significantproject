@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.personal.noncommercial.significantproject.R;
+import com.personal.noncommercial.significantproject.utils.DensityUtils;
 
 
 /**
@@ -84,7 +85,7 @@ public class CustomDialog extends Dialog {
             LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final CustomDialog mCustomDialog = new CustomDialog(mContext, R.style.CustomDialog);//默认调用带style的构造
             mCustomDialog.setCanceledOnTouchOutside(false);//默认点击布局外不能取消dialog
-           
+
             View view = mInflater.inflate(R.layout.custom_dialog, null);
 
 //    		GradientDrawable myGrad = (GradientDrawable) contentView
@@ -92,6 +93,12 @@ public class CustomDialog extends Dialog {
 //    		if (myGrad != null){
 //    			myGrad.setColor(Color.parseColor("#99000000"));
 //    		}
+
+           /* 改变宽度的方式
+           ViewGroup.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    DensityUtils.dp2px(300), LinearLayout.LayoutParams.WRAP_CONTENT);
+            mCustomDialog.setContentView(view, layoutParams);*/
+
             mCustomDialog.addContentView(view, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));//！！！
             if (!TextUtils.isEmpty(title)) {
                 TextView titleView = (TextView) view.findViewById(R.id.tv_title);
