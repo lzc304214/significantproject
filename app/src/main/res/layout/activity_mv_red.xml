@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.personal.noncommercial.significantproject.R"/>
+
+        <variable
+            name="user"
+            type="com.personal.noncommercial.significantproject.moudle.bean.User"/>
+
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="vmmodel"
+            type="com.personal.noncommercial.significantproject.viewModel.VMModel"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`姓名：`+user.name+`年龄：`+String.valueOf(user.age)+`field：`+vmmodel.field}"
+            app:colorType="@{user.colorType}"/>
+
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/gender_compare"
+            android:onClick="@{vmmodel::click}"
+            app:resId="@{user.isMan ? R.mipmap.doc_male : R.mipmap.doc_female}"
+            />
+    </LinearLayout>
+
+</layout>

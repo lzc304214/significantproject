@@ -14,6 +14,7 @@ import com.personal.noncommercial.significantproject.moudle.bean.HomeUIBean;
 import com.personal.noncommercial.significantproject.moudle.view.BaiDuMapActivity;
 import com.personal.noncommercial.significantproject.moudle.view.GaoDeLocationActivity;
 import com.personal.noncommercial.significantproject.moudle.view.LeftAndRightActivity;
+import com.personal.noncommercial.significantproject.moudle.view.MVRedActivity;
 import com.personal.noncommercial.significantproject.moudle.view.PayAliAndWXActivity;
 import com.personal.noncommercial.significantproject.moudle.view.EventBusFucActivity;
 import com.personal.noncommercial.significantproject.moudle.view.H5CallActivity;
@@ -46,19 +47,19 @@ public class HomeFragment extends BaseFragment {
             R.mipmap.home_bgcx_n, R.mipmap.home_pdjh_n, R.mipmap.home_yrqd_n,
             R.mipmap.home_yygh_n, R.mipmap.home_tjbg, R.mipmap.home_bgcx_n,
             R.mipmap.home_pdjh_n, R.mipmap.home_bgcx_n, R.mipmap.home_pdjh_n,
-            R.mipmap.home_bgcx_n};
+            R.mipmap.home_bgcx_n, R.mipmap.home_bgcx_n};
     //文本
     private String[] bottomText = {
             "图片", "图片2", "java与js",
             "eventBus", "调用H5", "列表",
             "支付", "百度定位", "高德定位",
-            "左右列表"};
+            "左右列表", "数据绑定"};
     //类
     private Class<?>[] activity = {
             PhotoActivity.class, PhotoActivity2.class, JavaAndJsActivity.class,
             EventBusFucActivity.class, H5CallActivity.class, RecyRelationActivity.class,
             PayAliAndWXActivity.class, BaiDuMapActivity.class, GaoDeLocationActivity.class,
-            LeftAndRightActivity.class};
+            LeftAndRightActivity.class, MVRedActivity.class};
     //数据集合
     private List<HomeUIBean> mHomeUIList;
     //适配器

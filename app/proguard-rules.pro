@@ -345,6 +345,9 @@ public static java.lang.String TABLENAME;
 -keep interface okio.** { *; }
 -dontwarn okio.**
 
+#dataBinding
+-keep class android.databinding.** { *; }
+-dontwarn android.databinding.**
 #############################################
 
 

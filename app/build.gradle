@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
+    dataBinding {
+        enabled = true
+    }
     compileSdkVersion rootProject.ext.compile_sdk
     defaultConfig {
         multiDexEnabled true
@@ -146,4 +149,5 @@ dependencies {
     //================================================================================
     //    implementation project(':retrofitnetworklib')
     implementation project(':matisse')
+    implementation 'cn.ittiger:indexstickyview:1.1.0'
 }
