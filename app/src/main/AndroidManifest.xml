@@ -64,28 +64,34 @@
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
 
-        <activity android:name=".indexlist.IndexStickyViewActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        <!--========用于城市列表的需求功能，只要开启这个intent-filter========-->
+        <activity
+            android:name=".indexlist.IndexStickyViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <!--  <intent-filter>
+                  <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                  <category android:name="android.intent.category.LAUNCHER"/>
+              </intent-filter>-->
         </activity>
-        <activity android:name=".indexlist.CityActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".indexlist.ContactActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".indexlist.CityActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".indexlist.ContactActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <!--==========用于城市列表的需求功能，只要开启这个intent-filter============-->
         <activity
             android:name=".moudle.view.SplashActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-           <!-- <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".moudle.view.GuideActivity"
