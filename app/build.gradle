@@ -29,6 +29,8 @@ android {
 
     }
 
+
+
     greendao {
         //数据库schema版本，也可以理解为数据库版本号
         schemaVersion 1
@@ -82,9 +84,10 @@ android {
     //Generate Signed APK: Errors while building APK.
 // You can find the errors in the 'Messages' view.
     lintOptions {
+        disable 'GoogleAppIndexingWarning'
+        baseline file("lint-baseline.xml")
         checkReleaseBuilds false
         abortOnError false
-        disable 'GoogleAppIndexingWarning'
     }
 
     //开启Java1.8 能够使用lambda表达式
