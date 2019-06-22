@@ -204,6 +204,10 @@
             android:name=".moudle.view.MVRedActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".moudle.kotlin.CommonKtActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
 
         <receiver
             android:name=".receiver.CusJpushReceiver"
