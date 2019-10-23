@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.personal.noncommercial.significantproject.viewModel.PageViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:pageLoadManager="@{viewModel.manager}">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:adapter="@{viewModel.manager.onItemBind}"
+                app:items="@{viewModel.manager.itemData}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>-->
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

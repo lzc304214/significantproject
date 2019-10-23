@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'org.greenrobot.greendao'
 
 android {
@@ -155,7 +156,10 @@ dependencies {
     //    implementation project(':retrofitnetworklib')
     implementation project(':matisse')
     implementation 'cn.ittiger:indexstickyview:1.1.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:2.2.0'
+    implementation 'me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:2.2.0'
 }
 repositories {
     mavenCentral()
